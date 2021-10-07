@@ -31,6 +31,7 @@ class Cell {
 
 class Game {
     constructor(size) {
+        this.size = size;
         this.board = Game.getBoard(size);
     }
 
@@ -38,30 +39,18 @@ class Game {
         return this.board[x][y];
     }
 
-    getFreeCellsIndex() {
-        var cellIndexs = [];
-        for (var i = 0; i < size; i++) {
-            for (var j = 0; j < size; j++) {
-                if (this.get(i, j).isFree()) cellIndexs.push({'x': i,'y': j});
-            }
+    selectFreeCellsIndexFromColumn(col) {
+        var indexs = [];
+        for (var i = 0; i < this.size; i++) {
+            if (this.get(col, i).isFree()) indexs.push({'x': col,'y': i});
         }
-        return cellIndexs;
-    }
-
-    getQueenCount(x, y) {
-        var queenCount = 0;
-        for (var i = 0; i < size; i++) {
-            for (var j = 0; j < size; j++) {
-                if (this.get(i, j).isQueen()) queenCount++;
-            }
-        }
-        return queenCount;
+        return indexs;
     }
     
     getCopy() {
-        var newGame = new Game(size);
-        for (var i = 0; i < size; i++) {
-            for (var j = 0; j < size; j++) {
+        var newGame = new Game(this.size);
+        for (var i = 0; i < this.size; i++) {
+            for (var j = 0; j < this.size; j++) {
                 newGame.get(i, j).state = this.get(i, j).state;
             }
         }
@@ -70,8 +59,8 @@ class Game {
 
     putQueenAt(x, y) {
         var copy = this.getCopy();
-        for (var i = 0; i < size; i++) {
-            for (var j = 0; j < size; j++) {
+        for (var i = 0; i < this.size; i++) {
+            for (var j = 0; j < this.size; j++) {
                 if (!copy.get(i, j).isFree()) continue;
 
                 if (i === x && j === y) {
@@ -85,21 +74,11 @@ class Game {
         return copy;
     }
 
-    isNotFreeCell() {
-        var allNotFree = true;
-        for (var i = 0; i < size; i++) {
-            for (var j = 0; j < size; j++) {
-                if (this.get(i, j).isFree()) allNotFree = false;
-            }
-        }
-        return allNotFree;
-    }
-
     draw() {
-        var result = '';
+        var result = `${this.size} 皇后的一解:\n`;
 
-        for (var j = 0; j < size; j++) {
-            for (var i = 0; i < size; i++) {
+        for (var j = 0; j < this.size; j++) {
+            for (var i = 0; i < this.size; i++) {
                 if (this.get(i, j).isQueen()) {
                     result += 'Ｑ';
                 }
@@ -112,7 +91,6 @@ class Game {
             }
             result += '\n';
         }
-
         console.log(result);
     }
 
@@ -128,47 +106,61 @@ class Game {
         return board;
     }
 
-    static isEqual(aGame, bGame) {
+    isEqual(targetGame) {
         var isEqual = true;
-        for (var i = 0; i < size; i++) {
-            for (var j = 0; j < size; j++) {
-                if (aGame.get(i, j).isQueen() !== (bGame.get(i, j).isQueen())) isEqual = false;
+        for (var i = 0; i < this.size; i++) {
+            for (var j = 0; j < this.size; j++) {
+                if (this.get(i, j).isQueen() !== (targetGame.get(i, j).isQueen())) isEqual = false;
             }
         }
         return isEqual;
     }
 }
 
-var size = 7;
-var myGame = new Game(size);
-var solutions = [];
+function queenRow(oldGame, col) {
+    var freeCells = oldGame.selectFreeCellsIndexFromColumn(col);
 
-function queenQuestion(oldGame) {
-    for (var index of oldGame.getFreeCellsIndex()) {
-        if (oldGame.isNotFreeCell()) continue;
+    for (var cellIndex of freeCells) {
 
-        var newGame = oldGame.putQueenAt(index.x, index.y);
+        var newGame = oldGame.putQueenAt(cellIndex.x, cellIndex.y);
 
         //newGame.draw();
 
-        if (newGame.getQueenCount() === size) {
-
-            //newGame.draw();
-
-            var isFinded = false;
-            for (var solution of solutions) {
-                if (Game.isEqual(solution, newGame)) isFinded = true;
+        var nextCol =  col + 1;
+        
+        if (nextCol == newGame.size) {
+            /*
+            var isFundamental = false;
+            for (var fundamental of fundamentals) {
+                if (newGame.isEqual(fundamental)) isFinded = true;
             }
-
-            if (!isFinded) {
+            
+            if (!isFundamental) {
+            */
                 newGame.draw();
                 solutions.push(newGame);
+            /*
             }
+            solutions.push(newGame);
+            */
         }
-        else queenQuestion(newGame);
+        else {
+            queenRow(newGame, nextCol);
+        }
     }
 }
 
-queenQuestion(myGame);
+var size = 1;
 
-console.log(solutions.length)
+while(true){
+    var myGame = new Game(size);
+    var solutions = [];
+    /*
+    var fundamentals = [];
+    */
+    
+    queenRow(myGame, 0);
+    
+    console.log(`${size} 皇后有 ${solutions.length} 種解`)
+    size++
+}
