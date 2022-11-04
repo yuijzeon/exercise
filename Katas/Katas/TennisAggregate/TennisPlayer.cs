@@ -7,11 +7,11 @@ public class TennisPlayer
         Name = name;
     }
 
+    public int Score { get; set; }
+    public string Name { get; set; }
+
     public void Scored(int score)
     {
         Score += score;
     }
-
-    public int Score { get; set; }
-    public string Name { get; set; }
 }

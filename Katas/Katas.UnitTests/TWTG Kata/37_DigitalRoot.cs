@@ -5,10 +5,12 @@ public static partial class Kata
     public static int DigitalRoot(long n)
     {
         var r = n;
+
         while (r > 9)
         {
             r = r.ToString().Select(o => Convert.ToInt32(o) - 48).ToArray().Sum();
         }
+
         return (int)r;
     }
 }
