@@ -10,62 +10,70 @@ public static partial class Kata
     public class CarPark
     {
         private readonly List<string> _drivingPath = new();
-        private readonly List<Floor> _floors = new();
+        private readonly List<List<Slot>> _floors = new();
+
+        private readonly Dictionary<int, Slot> _mapping = new()
+        {
+            [0] = Slot.Space,
+            [1] = Slot.Staircase,
+            [2] = Slot.Space
+        };
 
         public CarPark(int[,] carPark)
         {
             for (var i = 0; i < carPark.GetLength(0); i++)
             {
-                var floor = new Floor();
+                var floor = new List<Slot>();
 
                 for (var j = 0; j < carPark.GetLength(1); j++)
                 {
                     if (carPark[i, j] == 2)
                     {
-                        Locate = (i, j);
+                        CarPosition = new Position(i, j);
                     }
 
-                    floor.Add(carPark[i, j]);
+                    floor.Add(_mapping[carPark[i, j]]);
                 }
 
                 _floors.Add(floor);
             }
+
+            _floors[^1][^1] = Slot.Exit;
         }
 
-        private (int Floor, int Index) Locate { get; set; }
-        private Floor CurrentFloor => _floors[Locate.Floor];
-        private Slot CurrentSlot => CurrentFloor[Locate.Index];
-        private bool IsGroundFloor => Locate.Floor == _floors.Count - 1;
-        private bool IsExit => IsGroundFloor && Locate.Index == CurrentFloor.Count - 1;
+        private Position CarPosition { get; } = new();
+        private List<Slot> CurrentFloor => _floors[CarPosition.Floor];
+        private Slot CurrentSlot => CurrentFloor[CarPosition.Index];
+        private bool IsGroundFloor => CarPosition.Floor == _floors.Count - 1;
 
         public string[] GoExit()
         {
-            while (!IsExit)
+            while (CurrentSlot != Slot.Exit)
             {
-                var step = IsGroundFloor
-                    ? CurrentFloor.Count - Locate.Index - 1
-                    : CurrentFloor.IndexOf(Slot.Staircase) - Locate.Index;
-
-                if (step != 0)
+                if (CurrentSlot == Slot.Staircase)
                 {
-                    MoveSameFloor(step);
+                    MoveDownstairs();
                 }
                 else
                 {
-                    MoveDownstairs();
+                    MoveSameFloor();
                 }
             }
 
             return _drivingPath.ToArray();
         }
 
-        private void MoveSameFloor(int step)
+        private void MoveSameFloor()
         {
+            var step = (IsGroundFloor
+                ? CurrentFloor.IndexOf(Slot.Exit)
+                : CurrentFloor.IndexOf(Slot.Staircase)) - CarPosition.Index;
+
+            CarPosition.AddIndex(step);
+
             _drivingPath.Add(step < 0
                 ? "L" + -step
                 : "R" + step);
-
-            Locate = (Locate.Floor, Locate.Index + step);
         }
 
         private void MoveDownstairs()
@@ -75,34 +83,42 @@ public static partial class Kata
             while (CurrentSlot == Slot.Staircase)
             {
                 downStep++;
-                Locate = (Locate.Floor + 1, Locate.Index);
+                CarPosition.Downstairs();
             }
 
-            if (downStep != 0)
-            {
-                _drivingPath.Add("D" + downStep);
-            }
-        }
-
-        internal class Floor : List<Slot>
-        {
-            private readonly Dictionary<int, Slot> _mapping = new()
-            {
-                [0] = Slot.Space,
-                [1] = Slot.Staircase,
-                [2] = Slot.Space
-            };
-
-            public void Add(int i)
-            {
-                Add(_mapping[i]);
-            }
+            _drivingPath.Add("D" + downStep);
         }
 
         internal enum Slot
         {
             Space,
-            Staircase
+            Staircase,
+            Exit
+        }
+
+        internal class Position
+        {
+            public Position()
+            { }
+
+            public Position(int floor, int index)
+            {
+                Floor = floor;
+                Index = index;
+            }
+
+            public int Floor { get; set; }
+            public int Index { get; set; }
+
+            public void AddIndex(int step)
+            {
+                Index += step;
+            }
+
+            public void Downstairs()
+            {
+                Floor += 1;
+            }
         }
     }
 }
