@@ -4,31 +4,26 @@ public static partial class Kata
 {
     public static IList<IList<int>> ThreeSum(int[] nums)
     {
+        Array.Sort(nums);
         var list = new List<IList<int>>();
 
-        for (var i = 0; i < nums.Length; i++)
+        foreach (var (num1, i) in nums.Select((num1, i) => (num1, i)))
         {
-            for (var j = i + 1; j < nums.Length; j++)
+            foreach (var (num2, j) in nums[(i + 1)..].Select((num2, j) => (num2, j)))
             {
-                for (var k = j + 1; k < nums.Length; k++)
+                if (nums[(i + j + 2)..].All(num3 => num1 + num2 + num3 != 0))
                 {
-                    if (nums[i] + nums[j] + nums[k] != 0)
-                    {
-                        continue;
-                    }
+                    continue;
+                }
 
-                    var orderedEnumerable = new[] { nums[i], nums[j], nums[k] }.OrderBy(x => x).ToList();
-
-                    if (!list.Any(x => x[0] == orderedEnumerable[0] && x[1] == orderedEnumerable[1] && x[2] == orderedEnumerable[2]))
-                    {
-                        list.Add(orderedEnumerable);
-                    }
+                if (!list.Any(x => x.SequenceEqual(new[] { num1, num2, -num1 - num2 })))
+                {
+                    list.Add(new List<int> { num1, num2, -num1 - num2 });
                 }
             }
         }
 
-        throw new NotImplementedException("Big Data Timeout");
-
+        throw new Exception("LeetCode::Time Limit Exceeded");
         //return list;
     }
 }
@@ -44,7 +39,7 @@ public partial class KataTests
         get
         {
             yield return new TestCaseData(new[] { -1, 0, 1, 2, -1, -4 })
-                .Returns(new List<List<int>> { new() { -1, 0, 1 }, new() { -1, -1, 2 } });
+                .Returns(new List<List<int>> { new() { -1, -1, 2 }, new() { -1, 0, 1 } });
 
             yield return new TestCaseData(new[] { 0, 1, 1 })
                 .Returns(Array.Empty<IList<int>>());
