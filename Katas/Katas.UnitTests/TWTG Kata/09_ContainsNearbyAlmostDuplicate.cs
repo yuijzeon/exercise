@@ -4,7 +4,18 @@ public static partial class Kata
 {
     public static bool ContainsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff)
     {
-        throw new NotImplementedException();
+        for (var i = 0; i < nums.Length; i++)
+        {
+            for (var j = i + 1; j < Math.Min(i + indexDiff + 1, nums.Length); j++)
+            {
+                if (Math.Abs(nums[j] - nums[i]) <= valueDiff)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
 

@@ -4,26 +4,33 @@ public static partial class Kata
 {
     public static long NextSmaller(long n)
     {
-        var array = n.ToString().Select(x => x).ToArray();
+        var digits = n.ToString();
 
-        for (var i = array.Length - 1; i > 0; i--)
+        for (var i = digits.Length - 2; i >= 0; i--)
         {
-            var x = array[i];
-            var y = array[i - 1];
-            if (x >= y) continue;
-
-            if (x == '0' && i == 1)
+            if (digits[i] <= digits[i + 1])
             {
-                if (array[2] >= array[0]) continue;
-                array[0] = array[2];
-                array[2] = y;
-                var result = long.Parse(string.Join("", array));
-                return result;
+                continue;
             }
 
-            array[i] = y;
-            array[i - 1] = x;
-            return long.Parse(string.Join("", array));
+            var chars = digits[i..].OrderByDescending(x => x).ToList();
+
+            for (var j = 0; j < chars.Count; j++)
+            {
+                if (digits[i] <= chars[j])
+                {
+                    continue;
+                }
+
+                chars.Insert(0, chars[j]);
+                chars.RemoveAt(j + 1);
+                digits = string.Join("", digits[..i] + string.Join("", chars));
+
+                if (digits.First() != '0')
+                {
+                    return long.Parse(digits);
+                }
+            }
         }
 
         return -1;

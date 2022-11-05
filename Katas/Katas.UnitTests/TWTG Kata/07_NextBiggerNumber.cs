@@ -4,8 +4,30 @@ public static partial class Kata
 {
     public static long NextBiggerNumber(long n)
     {
-        var result = n.ToString().Select(Convert.ToInt32).ToArray();
-        Console.Write(result);
+        var digits = n.ToString();
+
+        for (var i = digits.Length - 2; i >= 0; i--)
+        {
+            if (digits[i] >= digits[i + 1])
+            {
+                continue;
+            }
+
+            var chars = digits[i..].OrderBy(x => x).ToList();
+
+            for (var j = 0; j < chars.Count; j++)
+            {
+                if (digits[i] >= chars[j])
+                {
+                    continue;
+                }
+
+                chars.Insert(0, chars[j]);
+                chars.RemoveAt(j + 1);
+                return long.Parse(string.Join("", digits[..i] + string.Join("", chars)));
+            }
+        }
+
         return -1;
     }
 }
