@@ -9,7 +9,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class XoTests
 {
     [TestCase("xo", ExpectedResult = true)]
     [TestCase("xxOo", ExpectedResult = true)]

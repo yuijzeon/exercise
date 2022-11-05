@@ -17,7 +17,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class Rot13Tests
 {
     [TestCase("EBG13 rknzcyr.", ExpectedResult = "ROT13 example.")]
     [TestCase("This is my first ROT13 excercise!", ExpectedResult = "Guvf vf zl svefg EBG13 rkprepvfr!")]

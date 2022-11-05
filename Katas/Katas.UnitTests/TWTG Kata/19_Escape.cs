@@ -124,12 +124,12 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class EscapeTests
 {
-    [Test, TestCaseSource(nameof(Kata19Cases))]
+    [Test, TestCaseSource(nameof(KataCases))]
     public string[] Escape(int[,] carPark) => Kata.Escape(carPark);
 
-    private static IEnumerable<TestCaseData> Kata19Cases
+    private static IEnumerable<TestCaseData> KataCases
     {
         get
         {

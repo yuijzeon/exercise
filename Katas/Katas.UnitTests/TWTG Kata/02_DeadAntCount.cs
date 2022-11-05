@@ -18,7 +18,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class DeadAntCountTests
 {
     [TestCase("ant ant ant ant", ExpectedResult = 0)]
     [TestCase(null, ExpectedResult = 0)]

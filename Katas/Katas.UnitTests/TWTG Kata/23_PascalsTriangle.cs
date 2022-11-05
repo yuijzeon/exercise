@@ -26,7 +26,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class PascalsTriangleTests
 {
     [TestCase(1, ExpectedResult = new[] { 1 })]
     [TestCase(2, ExpectedResult = new[] { 1, 1, 1 })]

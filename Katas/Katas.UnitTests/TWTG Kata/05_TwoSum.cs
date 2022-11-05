@@ -20,7 +20,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class TwoSumTests
 {
     [TestCase(new[] { 2, 7, 11, 15 }, 9, ExpectedResult = new[] { 0, 1 })]
     [TestCase(new[] { 3, 2, 4 }, 6, ExpectedResult = new[] { 1, 2 })]

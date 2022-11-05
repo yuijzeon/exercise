@@ -9,12 +9,11 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class HighestRankTests
 {
-    [Test]
-    public void HighestRank()
+    [TestCase(new[] { 12, 10, 8, 12, 7, 6, 4, 10, 12 }, ExpectedResult = 12)]
+    public int HighestRank(IEnumerable<int> arr)
     {
-        var arr = new[] { 12, 10, 8, 12, 7, 6, 4, 10, 12 };
-        Assert.That(Kata.HighestRank(arr), Is.EqualTo(12));
+        return Kata.HighestRank(arr);
     }
 }

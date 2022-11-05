@@ -11,7 +11,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class FindTests
 {
     [TestCase(new[] { 2, 6, 8, -10, 3 }, ExpectedResult = 3)]
     [TestCase(new[] { 206847684, 1056521, 7, 17, 1901, 21104421, 7, 1, 35521, 1, 7781 }, ExpectedResult = 206847684)]

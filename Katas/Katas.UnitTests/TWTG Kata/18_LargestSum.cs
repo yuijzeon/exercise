@@ -27,7 +27,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class LargestSumTests
 {
     [TestCase(new[] { -1, -2, -3 }, ExpectedResult = 0)]
     [TestCase(new[] { 0 }, ExpectedResult = 0)]

@@ -9,7 +9,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class EncodeTests
 {
     [TestCase("scout", 1939, ExpectedResult = new[] { 20, 12, 18, 30, 21 })]
     [TestCase("masterpiece", 1939, ExpectedResult = new[] { 14, 10, 22, 29, 6, 27, 19, 18, 6, 12, 8 })]

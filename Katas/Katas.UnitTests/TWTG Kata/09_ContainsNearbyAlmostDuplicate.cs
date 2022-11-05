@@ -20,7 +20,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class ContainsNearbyAlmostDuplicateTests
 {
     [TestCase(new[] { 1, 2, 3, 1 }, 3, 0, ExpectedResult = true)]
     [TestCase(new[] { 1, 5, 9, 1, 5, 9 }, 2, 3, ExpectedResult = false)]

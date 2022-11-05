@@ -16,7 +16,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class DigitalRootTests
 {
     [TestCase(16, ExpectedResult = 7)]
     [TestCase(456, ExpectedResult = 6)]

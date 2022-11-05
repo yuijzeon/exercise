@@ -33,7 +33,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class NextBiggerNumberTests
 {
     [TestCase(12, ExpectedResult = 21)]
     [TestCase(513, ExpectedResult = 531)]

@@ -9,11 +9,11 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class OnlyOneTests
 {
-    [Test]
-    public void OnlyOne()
+    [TestCase(true, false, ExpectedResult = true)]
+    public bool OnlyOne(params bool[] flags)
     {
-        Assert.That(Kata.OnlyOne(true, false), Is.EqualTo(true));
+        return Kata.OnlyOne(true, false);
     }
 }

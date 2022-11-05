@@ -11,7 +11,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class BandNameGeneratorTests
 {
     [TestCase("knife", ExpectedResult = "The Knife")]
     [TestCase("tart", ExpectedResult = "Tartart")]

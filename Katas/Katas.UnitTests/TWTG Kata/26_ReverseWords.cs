@@ -9,11 +9,11 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class ReverseWordsTests
 {
-    [Test]
-    public void ReverseWords()
+    [TestCase("This is an example!", ExpectedResult = "sihT si na !elpmaxe")]
+    public string ReverseWords(string str)
     {
-        Assert.That(Kata.ReverseWords("This is an example!"), Is.EqualTo("sihT si na !elpmaxe"));
+        return Kata.ReverseWords(str);
     }
 }

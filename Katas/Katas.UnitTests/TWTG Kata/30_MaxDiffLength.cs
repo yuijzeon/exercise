@@ -14,13 +14,12 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class MaxDiffLengthTests
 {
-    [Test]
-    public void MaxDiffLength()
+    [TestCase(new[] { "hoqq", "bbllkw", "oox", "ejjuyyy", "plmiis", "xxxzgpsssa", "xxwwkktt", "znnnnfqknaz", "qqquuhii", "dvvvwz" },
+        new[] { "cccooommaaqqoxii", "gggqaffhhh", "tttoowwwmmww" }, ExpectedResult = 13)]
+    public int MaxDiffLength(string[] a1, string[] a2)
     {
-        string[] s1 = { "hoqq", "bbllkw", "oox", "ejjuyyy", "plmiis", "xxxzgpsssa", "xxwwkktt", "znnnnfqknaz", "qqquuhii", "dvvvwz" };
-        string[] s2 = { "cccooommaaqqoxii", "gggqaffhhh", "tttoowwwmmww" };
-        Assert.That(Kata.MaxDiffLength(s1, s2), Is.EqualTo(13));
+        return Kata.MaxDiffLength(a1, a2);
     }
 }

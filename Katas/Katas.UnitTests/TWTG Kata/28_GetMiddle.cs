@@ -11,7 +11,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class GetMiddleTests
 {
     [TestCase("test", ExpectedResult = "es")]
     [TestCase("testing", ExpectedResult = "t")]

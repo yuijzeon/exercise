@@ -37,7 +37,7 @@ public class Dartboard
 }
 
 [TestFixture]
-public partial class KataTests
+public class DartboardTests
 {
     [TestCase(-133.69, -147.38, ExpectedResult = "X")]
     [TestCase(4.06, 0.71, ExpectedResult = "DB")]

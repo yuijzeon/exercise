@@ -83,7 +83,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class RomanConvertTests
 {
     [TestCase(1, ExpectedResult = "I")]
     [TestCase(2, ExpectedResult = "II")]

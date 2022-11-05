@@ -24,17 +24,17 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class AverageStringTests
 {
-    [TestCase("zero nine five two", "four")]
-    [TestCase("four six two three", "three")]
-    [TestCase("one two three four five", "three")]
-    [TestCase("five four", "four")]
-    [TestCase("zero zero zero zero zero", "zero")]
-    [TestCase("one one eight one", "two")]
-    [TestCase("", "n/a")]
-    public void AverageString(string str, string expected)
+    [TestCase("zero nine five two", ExpectedResult = "four")]
+    [TestCase("four six two three", ExpectedResult = "three")]
+    [TestCase("one two three four five", ExpectedResult = "three")]
+    [TestCase("five four", ExpectedResult = "four")]
+    [TestCase("zero zero zero zero zero", ExpectedResult = "zero")]
+    [TestCase("one one eight one", ExpectedResult = "two")]
+    [TestCase("", ExpectedResult = "n/a")]
+    public string AverageString(string str)
     {
-        Assert.That(Kata.AverageString(str), Is.EqualTo(expected));
+        return Kata.AverageString(str);
     }
 }

@@ -31,6 +31,7 @@ public static partial class Kata
                     idx2++;
                 }
             }
+
             var current = nums[idx1];
             while (idx1 + 1 < nums.Length - 2 && nums[idx1 + 1] == current) idx1++;
         }
@@ -40,12 +41,12 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class ThreeSumTests
 {
-    [Test, TestCaseSource(nameof(Kata6Cases))]
+    [Test, TestCaseSource(nameof(KataCases))]
     public IList<IList<int>> ThreeSum(int[] nums) => Kata.ThreeSum(nums);
 
-    private static IEnumerable<TestCaseData> Kata6Cases
+    private static IEnumerable<TestCaseData> KataCases
     {
         get
         {

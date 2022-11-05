@@ -27,7 +27,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class CountCombinationsTests
 {
     [TestCase(4, new[] { 1, 2 }, ExpectedResult = 3)]
     [TestCase(10, new[] { 5, 2, 3 }, ExpectedResult = 4)]

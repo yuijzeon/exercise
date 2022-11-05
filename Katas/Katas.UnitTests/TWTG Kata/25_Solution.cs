@@ -11,11 +11,11 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class SolutionTests
 {
-    [Test]
-    public void Solution()
+    [TestCase(10, ExpectedResult = 23)]
+    public int Solution(int value)
     {
-        Assert.That(Kata.Solution(10), Is.EqualTo(23));
+        return Kata.Solution(10);
     }
 }

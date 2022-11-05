@@ -107,7 +107,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class RunnersMeetingsTests
 {
     [TestCase(new[] { 1, 4, 2 }, new[] { 27, 18, 24 }, ExpectedResult = 3)]
     [TestCase(new[] { 1, 4, 2 }, new[] { 5, 6, 2 }, ExpectedResult = 2)]

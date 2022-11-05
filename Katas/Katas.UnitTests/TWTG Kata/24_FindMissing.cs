@@ -19,12 +19,12 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class FindMissingTests
 {
-    [Test, TestCaseSource(nameof(Kata24Cases))]
+    [Test, TestCaseSource(nameof(KataCases))]
     public int FindMissing(List<int> list) => Kata.FindMissing(list);
 
-    private static IEnumerable<TestCaseData> Kata24Cases
+    private static IEnumerable<TestCaseData> KataCases
     {
         get
         {

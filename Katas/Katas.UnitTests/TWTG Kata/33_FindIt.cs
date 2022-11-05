@@ -9,11 +9,11 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class FindItTests
 {
-    [Test]
-    public void FindIt()
+    [TestCase(new[] { 20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5 }, ExpectedResult = 5)]
+    public int FindIt(int[] seq)
     {
-        Assert.That(Kata.FindIt(new[] { 20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5 }), Is.EqualTo(5));
+        return Kata.FindIt(seq);
     }
 }

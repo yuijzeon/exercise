@@ -11,7 +11,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class CatMouseTests
 {
     [TestCase("C....m", ExpectedResult = "Escaped!")]
     [TestCase("C..m", ExpectedResult = "Caught!")]

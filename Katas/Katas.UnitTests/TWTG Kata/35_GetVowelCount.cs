@@ -9,11 +9,11 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class GetVowelCountTests
 {
-    [Test]
-    public void GetVowelCount()
+    [TestCase("abracadabra", ExpectedResult = 5, Description = "Nope!")]
+    public int GetVowelCount(string str)
     {
-        Assert.That(Kata.GetVowelCount("abracadabra"), Is.EqualTo(5), "Nope!");
+        return Kata.GetVowelCount("abracadabra");
     }
 }

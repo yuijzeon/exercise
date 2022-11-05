@@ -21,7 +21,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class SumStringsTests
 {
     [TestCase("1", "2", ExpectedResult = "3")]
     [TestCase("123", "456", ExpectedResult = "579")]

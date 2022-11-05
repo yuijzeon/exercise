@@ -9,7 +9,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class IsAnagramTests
 {
     [TestCase("foefet", "toffee", ExpectedResult = true)]
     [TestCase("Buckethead", "DeathCubeK", ExpectedResult = true)]

@@ -26,7 +26,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class WorkOnStringsTests
 {
     [TestCase("abc", "cde", ExpectedResult = "abCCde")]
     [TestCase("abab", "bababa", ExpectedResult = "ABABbababa")]

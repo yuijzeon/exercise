@@ -9,7 +9,7 @@ public static partial class Kata
 }
 
 [TestFixture]
-public partial class KataTests
+public class DuplicateCountTests
 {
     [TestCase("", ExpectedResult = 0)]
     [TestCase("abcde", ExpectedResult = 0)]
